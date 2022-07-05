@@ -3,26 +3,26 @@ package membership;
 import test.db.JDBConnect2;
 
 public class MemberDAO extends JDBConnect2 {
-	// ¸í½ÃÇÑ µ¥ÀÌÅÍº£ÀÌ½º ¿¬°áÀÌ ¿Ï·áµÈ MmeberDAO °´Ã¼¸¦ »ı¼º
+	// ëª…ì‹œí•œ ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²°ì´ ì™„ë£Œëœ MmeberDAO ê°ì²´ë¥¼ ìƒì„±
 	public MemberDAO(String driver, String url, String id, String passwd) {
 		super(driver, url, id, passwd);
 	}
 	
-	// ¸í½ÃÇÑ ¾ÆÀÌµğ/ºñ¹Ğ¹øÈ£¿Í ÀÏÄ¡ÇÏ´Â È¸¿ø Á¤º¸¸¦ ¹İÈ¯ÇÑ´Ù.
+	// ëª…ì‹œí•œ ì•„ì´ë””/ë¹„ë°€ë²ˆí˜¸ì™€ ì¼ì¹˜í•˜ëŠ” íšŒì› ì •ë³´ë¥¼ ë°˜í™˜í•œë‹¤.
     public MemberDTO getMemberDTO(String id, String passwd) {
 
-		MemberDTO dto = new MemberDTO(); 	// È¸¿ø Á¤º¸ DTO °´Ã¼ »ı¼º
+		MemberDTO dto = new MemberDTO(); 	// íšŒì› ì •ë³´ DTO ê°ì²´ ìƒì„±
 		String query = " SELECT * FROM member2 WHERE id=? AND passwd=?";
 		
 		try {
-			// Äõ¸® ½ÇÇà
+			// ì¿¼ë¦¬ ì‹¤í–‰
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);		// Äõ¸®¹® Ã¹ ¹øÂ° ÀÎÆÄ¸®¹ÌÅÍ
-			pstmt.setString(2, passwd);	// Äõ¸®¹® µÎ ¹øÂ° ÀÎÆÄ¶ó¹ÌÅÍ
-			rs = pstmt.executeQuery();		// Äõ¸®¹® ½ÇÇà
+			pstmt.setString(1, id);		// ì¿¼ë¦¬ë¬¸ ì²« ë²ˆì§¸ ì¸íŒŒë¦¬ë¯¸í„°
+			pstmt.setString(2, passwd);	// ì¿¼ë¦¬ë¬¸ ë‘ ë²ˆì§¸ ì¸íŒŒë¼ë¯¸í„°
+			rs = pstmt.executeQuery();		// ì¿¼ë¦¬ë¬¸ ì‹¤í–‰
 			
 			if (rs.next()) {
-				// Äõ¸® °á°ú·Î °¡Á®¿Â È¸¿ø Á¤º¸¸¦ DTO °´Ã¼¿¡ ÀúÀå
+				// ì¿¼ë¦¬ ê²°ê³¼ë¡œ ê°€ì ¸ì˜¨ íšŒì› ì •ë³´ë¥¼ DTO ê°ì²´ì— ì €ì¥
 				dto.setId(rs.getString("id"));
 				dto.setPass(rs.getString("passwd"));
 				dto.setEmail(rs.getString("email"));
@@ -31,10 +31,10 @@ public class MemberDAO extends JDBConnect2 {
 			}
 		}
 		catch (Exception e) {
-			System.out.println("¹®Á¦ ¹ß»ı!");
+			System.out.println("ë¬¸ì œ ë°œìƒ!");
 			e.printStackTrace();
 		}
 		
-		return dto;		// DTO °´Ã¼ ¹İÈ¯
+		return dto;		// DTO ê°ì²´ ë°˜í™˜
 	}
 }

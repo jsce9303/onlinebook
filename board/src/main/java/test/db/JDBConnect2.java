@@ -13,22 +13,22 @@ public class JDBConnect2{
 	public PreparedStatement pstmt;
 	public ResultSet rs;
 
-	//±âº» »ı¼ºÀÚ
+	//ê¸°ë³¸ ìƒì„±ì
 	public JDBConnect2(String driver, String url, String id, String passwd) {
 		try {
-			// JDBC µå¶óÀÌ¹ö ·Îµå
+			// JDBC ë“œë¼ì´ë²„ ë¡œë“œ
 			Class.forName("org.mariadb.jdbc.Driver");
-			System.out.println("µå¶óÀÌ¹ö ·Îµå ¼º°ø2");
+			System.out.println("ë“œë¼ì´ë²„ ë¡œë“œ ì„±ê³µ2");
 			
-			//Database ¿¬°á
+			//Database ì—°ê²°
 			conn = DriverManager.getConnection(url, id, passwd);
-			System.out.println("DB ¿¬°á ¼º°ø2");
+			System.out.println("DB ì—°ê²° ì„±ê³µ2");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 }
-	//°´Ã¼ ¹İÈ¯
+	//ê°ì²´ ë°˜í™˜
 	public void close() {
 		try {
 			if(rs != null) rs.close();

@@ -1,17 +1,17 @@
 package membership;
 
 
-//º°´Ù¸¥ ·ÎÁ÷ ¾øÀÌ ¼Ó¼º°ú ±× ¼Ó¼º¿¡ Á¢±ÙÇÏ±â À§ÇÑ °ÔÅÍ/¼¼ÅÍ ¸Ş¼­µå¸¸ °®Ãá°ÍÀ» DTO(Data Transfer Object)¶ó°í ÇÑ´Ù.
+//ë³„ë‹¤ë¥¸ ë¡œì§ ì—†ì´ ì†ì„±ê³¼ ê·¸ ì†ì„±ì— ì ‘ê·¼í•˜ê¸° ìœ„í•œ ê²Œí„°/ì„¸í„° ë©”ì„œë“œë§Œ ê°–ì¶˜ê²ƒì„ DTO(Data Transfer Object)ë¼ê³  í•œë‹¤.
 public class MemberDTO {
-	//¸â¹ö º¯¼ö ¼±¾ğ
+	//ë©¤ë²„ ë³€ìˆ˜ ì„ ì–¸
 	private String id;
 	private String pass;
 	private String email;
 	private String regidate;
 	private int	level;
 	
-	//private º¯¼ö±â ¶§¹®¿¡ get°ú setÀ» ÅëÇØ Á¢±ÙÇØ¾ß ÇÑ´Ù.
-	//¸â¹ö º¯¼ö¸¶´Ù °ÔÅÍ¿Í ¼¼ÅÍ ¼³Á¤
+	//private ë³€ìˆ˜ê¸° ë•Œë¬¸ì— getê³¼ setì„ í†µí•´ ì ‘ê·¼í•´ì•¼ í•œë‹¤.
+	//ë©¤ë²„ ë³€ìˆ˜ë§ˆë‹¤ ê²Œí„°ì™€ ì„¸í„° ì„¤ì •
 	
 	public String getId() {
 		return id;
