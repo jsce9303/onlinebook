@@ -13,6 +13,7 @@ public class MemberDAO extends JDBConnect2 {
 
 		MemberDTO dto = new MemberDTO(); 	// 회원 정보 DTO 객체 생성
 		String query = " SELECT * FROM member2 WHERE id=? AND passwd=?";
+		String realTime = "UPDATE member2 SET lasttime=now() WHERE id=?";
 		
 		try {
 			// 쿼리 실행
@@ -22,12 +23,18 @@ public class MemberDAO extends JDBConnect2 {
 			rs = pstmt.executeQuery();		// 쿼리문 실행
 			
 			if (rs.next()) {
-				// 쿼리 결과로 가져온 회원 정보를 DTO 객체에 저장
+				// 쿼리 결과로 가져온 회원 정보를 DTO 객체에 저장1
 				dto.setId(rs.getString("id"));
 				dto.setPass(rs.getString("passwd"));
 				dto.setEmail(rs.getString("email"));
 				dto.setRegidate(rs.getString("regdate"));
 				dto.setLevel(rs.getInt("level"));
+				dto.setLasttime(rs.getString("lasttime"));
+				
+				pstmt = conn.prepareStatement(realTime);
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+				// executeUpdate는 하나의 레코드를 수정할때 사용 , 성공시 결과값이 숫자로 반환
 			}
 		}
 		catch (Exception e) {

@@ -5,7 +5,7 @@
 <%
 	//해당 페이지에선 레벨에따라 기능을 표시하므로 id와 level을 선언한다.		
 	String sessionId;
-	int cklevel;
+	int cklevel;	// 접속자의 레벨체크
 		//세션 값이 있는지 체크
 	if(session.getAttribute("sessionId") != null) {					//세션값이 null이 아닐경우(존재할 경우) 아래를 실행한다.
 		sessionId = (String)session.getAttribute("sessionId");		//sessionId에 세션값 저장
@@ -44,7 +44,76 @@
 
 		// 5. SQL 실행
 		rs = pstmt.executeQuery();
-		
+	%>
+
+<html>
+  <head><title> 게시판 </title></head>
+  
+	<!-- 레벨이 4 이상부터 회원정보 조회 / 삭제 가능 -->
+	<%if(cklevel==4){ %>
+	<table border="1">
+		<caption>회원목록</caption>
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>이메일</th>
+					<th>휴대번호</th>
+					<th>생년월일</th>
+					<th>등록일자</th>
+					<th>회원레벨</th>
+					<th>마지막 접속시간</th>
+					<th>삭제</th>
+					<th>레벨업</th>
+					<th>레벨다운</th>
+				</tr>
+			</thead>
+			<tbody>
+<%
+			// rs.next()는 각 행을 조사하여 데이터가 있으면 true로 리턴하고 다음 행으로 이동한다 - 데이터가 없을 때 까지
+		while(rs.next()) {
+			String id = rs.getString("id");
+			String passwd = rs.getString("passwd");
+			String email = rs.getString("email");
+			String phone = rs.getString("phone");
+			String birth = rs.getString("birth");
+			String regdate = rs.getString("regdate");
+			int level = rs.getInt("level");
+			String lasttime = rs.getString("lasttime");
+			// 출력이 잘 되는지 임시 테스트하기 위한 구문
+			// out.println(id + " | " + birth + " | " + regdate);
+%>
+
+			<tr>
+				<td><%=id %></td>
+				<td><%=passwd %></td>
+				<td><%=email %></td>
+				<td><%=phone %></td>
+				<td><%=birth %></td>
+				<td><%=regdate %></td>
+				<td><%=level %></td>
+				<td><%=lasttime %></td>
+				<td>
+		    		<a href="member_delete.jsp?id=<%=id %>">삭제</a> <!-- 삭제링크를 누르면 삭제절차 실행 -->
+				</td>
+				<td>
+		    		<a href="member_levelup.jsp?id=<%=id %>">레벨+1</a> <!-- 레벨업을 누르면 레벨+1 실행 -->
+				</td>
+				<td>
+		    		<a href="member_leveldown.jsp?id=<%=id %>">레벨-1</a> <!-- 레벨다운 누르면 레벨-1 실행 -->
+				</td>
+			</tr>
+<%
+		}
+%>
+<%
+	}
+%>
+		</tbody>
+	</table>
+	<%
+
+	
 
 	}
 	catch(ClassNotFoundException e) {
@@ -71,12 +140,9 @@
 		}
 	}
 	%>
-
-<html>
-  <head><title> 게시판 </title></head>
   <body>
   
-	<% if(cklevel>=2){%>
+	<% if(cklevel>=2){%>	<!-- 레벨 2부터 게시글 조회가능 -->
  <h3> 게시글 리스트 </h3>
      <table border="2">
       <tr>
@@ -104,7 +170,7 @@
                String sql = "select * from message order by id asc ";
                ResultSet rs2 = stmt.executeQuery(sql);
 
-	if( rs2 != null) {
+	if( rs2 != null) {	// 게시글 리스트 불러오기
   	 while(rs2.next())
 	 {
 	       int id = Integer.parseInt(rs2.getString("id"));

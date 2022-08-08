@@ -8,6 +8,7 @@ public class MemberDTO {
 	private String pass;
 	private String email;
 	private String regidate;
+	private String lasttime;
 	private int	level;
 	
 	//private 변수기 때문에 get과 set을 통해 접근해야 한다.
@@ -42,5 +43,11 @@ public class MemberDTO {
 	}
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	public String getLasttime() {
+		return lasttime;
+	}
+	public void setLasttime(String lasttime) {
+		this.lasttime = lasttime;
 	}
 }

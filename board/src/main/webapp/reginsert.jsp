@@ -28,7 +28,7 @@
 
 		// 3. SQL 구문 선언
 		String insertSql = "insert into member2 values(?, ?, ?, ?, ?, ?, ?, now())";
-		String updatelevel = "update member2 set level=level+2 where id='admin'"; // admin id에만 레벨 2를 추가함
+		String updatelevel = "update member2 set level=level+3 where id='admin'"; // admin id에만 레벨 2를 추가함
 
 
 		// 4. preparedStatement 객체 인스턴스 변수 선언 및 실행
